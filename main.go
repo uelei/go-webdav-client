@@ -65,24 +65,6 @@ func upload_file(c gowebdav.Client, base_dir string, file_name string) {
 	c.WriteStream(filepath.Join(base_dir, file_name), fil, 0644)
 }
 
-// func md5_file(path string) (string) {
-
-//  	file, err := os.Open(path)
-
-//  	if err != nil {
-//  		panic(err)
-//  	}
-
-//  	defer file.Close()
-
-//  	hash := md5.New()
-//  	_, err = io.Copy(hash, file)
-
-//  	if err != nil {
-//  		panic(err)
-//  	}
-//   return hex.EncodeToString(hash.Sum(nil))
-// }
 
 func upload_a_local_folder(c gowebdav.Client, base_dir string, local_folder_name string, local_base_path string) {
 	fmt.Println("uploading local folder ", base_dir, local_folder_name)
