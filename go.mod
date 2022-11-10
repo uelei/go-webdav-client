@@ -1,4 +1,4 @@
-module github.com/uelei/go-webdav-client
+module github.com/uelei/go_webdav_client
 
 go 1.19
 
