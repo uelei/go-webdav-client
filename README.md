@@ -1,2 +1,2 @@
-# go_webdav_client
+# go-webdav-client
 rsync like to webdav server
