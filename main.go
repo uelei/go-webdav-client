@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -55,7 +54,7 @@ func upload_file(c *gowebdav.Client, base_dir string, file_name string) {
 	full_path := filepath.Join(get_local_path(base_dir), file_name)
 
 	fmt.Println("Uploading new File ", full_path)
-	bytes, _ := ioutil.ReadFile(full_path)
+	bytes, _ := os.ReadFile(full_path)
 
 	c.Write(filepath.Join(base_dir, file_name), bytes, 0644)
 
@@ -64,7 +63,6 @@ func upload_file(c *gowebdav.Client, base_dir string, file_name string) {
 
 	c.WriteStream(filepath.Join(base_dir, file_name), fil, 0644)
 }
-
 
 func upload_a_local_folder(c *gowebdav.Client, base_dir string, local_folder_name string, local_base_path string) {
 	fmt.Println("uploading local folder ", base_dir, local_folder_name)
