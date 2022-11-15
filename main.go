@@ -35,7 +35,7 @@ func get_local_path(base_dir string) string {
 	return path
 }
 
-func download_file(c gowebdav.Client, base_dir string, file_name string, server_time time.Time) {
+func download_file(c *gowebdav.Client, base_dir string, file_name string, server_time time.Time) {
 	reader, _ := c.ReadStream(base_dir + file_name)
 
 	full_path := filepath.Join(get_local_path(base_dir), file_name)
@@ -51,7 +51,7 @@ func download_file(c gowebdav.Client, base_dir string, file_name string, server_
 	}
 }
 
-func upload_file(c gowebdav.Client, base_dir string, file_name string) {
+func upload_file(c *gowebdav.Client, base_dir string, file_name string) {
 	full_path := filepath.Join(get_local_path(base_dir), file_name)
 
 	fmt.Println("Uploading new File ", full_path)
@@ -66,7 +66,7 @@ func upload_file(c gowebdav.Client, base_dir string, file_name string) {
 }
 
 
-func upload_a_local_folder(c gowebdav.Client, base_dir string, local_folder_name string, local_base_path string) {
+func upload_a_local_folder(c *gowebdav.Client, base_dir string, local_folder_name string, local_base_path string) {
 	fmt.Println("uploading local folder ", base_dir, local_folder_name)
 
 	err := c.Mkdir(base_dir+local_folder_name, 0644)
@@ -91,7 +91,7 @@ func upload_a_local_folder(c gowebdav.Client, base_dir string, local_folder_name
 	}
 }
 
-func check_folder(c gowebdav.Client, base_dir string) {
+func check_folder(c *gowebdav.Client, base_dir string) {
 	println("checking base dir = ", base_dir)
 
 	sync := make(map[string]time.Time)
@@ -171,5 +171,5 @@ func main() {
 	}
 	c := gowebdav.NewClient(server, user, password)
 
-	check_folder(*c, "/notes/")
+	check_folder(c, "/notes/")
 }
