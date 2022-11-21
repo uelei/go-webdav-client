@@ -42,7 +42,7 @@ func download_file(c *gowebdav.Client, base_dir string, file_name string, server
 	f, _ := os.Create(full_path)
 	defer f.Close()
 
-  _, er := io.Copy(f, reader)
+	_, er := io.Copy(f, reader)
 
 	if er != nil {
 		fmt.Println(er)
@@ -60,8 +60,8 @@ func upload_file(c *gowebdav.Client, base_dir string, file_name string) {
 	fmt.Println("Uploading new File ", full_path)
 	bytes, _ := os.ReadFile(full_path)
 
-  er := c.Write(filepath.Join(base_dir, file_name), bytes, 0644)
-  
+	er := c.Write(filepath.Join(base_dir, file_name), bytes, 0644)
+
 	if er != nil {
 		fmt.Println(er)
 	}
@@ -70,11 +70,9 @@ func upload_file(c *gowebdav.Client, base_dir string, file_name string) {
 	defer fil.Close()
 
 	err := c.WriteStream(filepath.Join(base_dir, file_name), fil, 0644)
-  
 	if err != nil {
 		fmt.Println(err)
 	}
-
 }
 
 func upload_a_local_folder(c *gowebdav.Client, base_dir string, local_folder_name string, local_base_path string) {
@@ -133,15 +131,14 @@ func check_folder(c *gowebdav.Client, base_dir string) {
 	fils, err := os.ReadDir(path)
 	if err != nil {
 		fmt.Println("Creating a folder", path)
-		
-    er := os.Mkdir(path, os.ModePerm)
-	  
-    if er != nil {
-      fmt.Println(er)
 
-    }
+		er := os.Mkdir(path, os.ModePerm)
 
-    for _, file := range files {
+		if er != nil {
+			fmt.Println(er)
+		}
+
+		for _, file := range files {
 			download_file(c, base_dir, file.Name(), file.ModTime())
 		}
 	}
